@@ -1,0 +1,430 @@
+{
+  "uuid": "7e9e23a4-fc44-4351-b646-af6c553df829",
+  "lastMigration": 32,
+  "name": "BJBS SIM",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3009,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "11cb3f64-9dfc-447a-9327-5232b78866e9",
+      "type": "http",
+      "documentation": "Sign-In",
+      "method": "post",
+      "endpoint": "api/developer/auth/sign-in",
+      "responses": [
+        {
+          "uuid": "f0dd5172-dbe1-419e-ba71-2ef98390ff35",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"message\": \"User berhasil sign-in!\",\n  \"data\":{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "78128e92-0b50-4d29-9ce5-c9220db02586",
+      "type": "http",
+      "documentation": "Get Account / Balance Inquiry",
+      "method": "get",
+      "endpoint": "api/developer/core/get-account/",
+      "responses": [
+        {
+          "uuid": "35ee06a0-6c7e-405f-a94c-45e7731d8091",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"OK\",\n  \"data\": {\n    \"statusId\": 1,\n    \"message\": \"Inquiry Rekening Berhasil\",\n    \"rCode\": \"00\",\n    \"result\": {\n      \"ACCESLVL\": null,\n      \"ACCNBR\": \"0070252574288\",\n      \"ACCSTS\": 1,\n      \"ADDR\": \"BANDUNG\",\n      \"APPLID\": \"02\",\n      \"APPLID_BE\": \"02\",\n      \"BLOKIR_AFILIASI\": 0,\n      \"BODBAL\": 0,\n      \"BODBAL_BEF\": 0,\n      \"BRANCHID\": \"007\",\n      \"BRTDT\": \"1999-10-10\",\n      \"CCYID\": \"IDR\",\n      \"CIFID\": \"0000952162\",\n      \"CIFTYPE\": 0,\n      \"DTBAL\": \"2024-10-21\",\n      \"DTBAL_BEF\": \"2024-10-20\",\n      \"FIRSTDEP\": 0,\n      \"FLGDRAWMIN\": 0,\n      \"FULLNM\": \"DESTA\",\n      \"IDNBR\": \"3204325304990000\",\n      \"MAXWTHDR\": 0,\n      \"MAXWTHDRDAY\": 0,\n      \"MINBAL\": 0,\n      \"MINSVG\": 0,\n      \"MOTHRNM\": \"AGIS\",\n      \"MUTCR\": 0,\n      \"MUTDB\": 0,\n      \"NICKNM\": \"DESTA\",\n      \"NOHP\": \"+621312999888\",\n      \"NOTELP\": \"022750750750\",\n      \"NPWP\": \"698930484444000\",\n      \"PRODID\": \"52\",\n      \"SALDO_AWAL\": 0,\n      \"SALDO_AKHIR\": 0,\n      \"SALDO_BLOKIR\": 0,\n      \"SALDO_EFEKTIF\": 0,\n      \"SALDO_KLIRING\": 0,\n      \"SBLOKIR_AFILIASI\": \"0.00\",\n      \"SBODBAL\": \"-0.00\",\n      \"SMUTCR\": \"-0.00\",\n      \"SMUTDB\": \"0.00\",\n      \"SSALDO_AWAL\": \"-0.00\",\n      \"SSALDO_AKHIR\": \"-0.00\",\n      \"SSALDO_BLOKIR\": \"0.00\",\n      \"SSALDO_EFEKTIF\": \"-0.00\",\n      \"SSALDO_KLIRING\": \"0.00\",\n      \"STATUS\": \"1\"\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "AccNbr",
+              "value": "39358082311116631",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "491eb093-b51d-4919-a271-182bdec01894",
+      "type": "http",
+      "documentation": "Bulk Trx / Intrabank Transfer",
+      "method": "post",
+      "endpoint": "api/developer/core/trx-v2",
+      "responses": [
+        {
+          "uuid": "32fd95aa-5d23-479f-8896-97dfdbfef0ec",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"Transaksi Berhasil\",\n  \"data\": {\n    \"TXID\": \"s215143014\",\n    \"id_trx_code\": 289653291\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d0974728-4d56-49c4-a0b2-b2f9e319ed2a",
+      "type": "http",
+      "documentation": "Trx Check / Account Transfer Status",
+      "method": "post",
+      "endpoint": "api/trx/check",
+      "responses": [
+        {
+          "uuid": "1572b1e2-3993-4878-83c2-72b264e594f2",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"Request has been processed successfully\",\n  \"data\": {\n    \"responseCode\": \"2003600\",\n    \"responseMessage\": \"Request has been processed successfully\",\n    \"beneficiaryAccountNo\": \"0080210002622\",\n    \"beneficiaryBankCode\": \"\",\n    \"currency\": \"IDR\",\n    \"previousResponseCode\": \"2000000\",\n    \"referenceNumber\": \"tdiopenapi09059\",\n    \"sourceAccountNo\": \"5140102000283\",\n    \"transactionId\": \"30707568\",\n    \"latestTransactionStatus\": \"00\",\n    \"transactionStatusDesc\": \"success\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "86899989-f178-4bfb-8191-35affbf96530",
+      "type": "http",
+      "documentation": "Get Account Saving / Account Creation",
+      "method": "get",
+      "endpoint": "api/v1.0/account-saving/",
+      "responses": [
+        {
+          "uuid": "7f266191-0c73-44ac-a4a6-6c962e6dfb85",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"success\",\n  \"data\": {\n    \"statusId\": 1,\n    \"message\": \"Inquiry Rekening Berhasil\",\n    \"rCode\": \"00\",\n    \"result\": {\n      \"ACCNBR\": \"0080201724649\",\n      \"PRODID\": \"01\",\n      \"FULLNM\": \"LENI SALSABILA APRILIYANI\",\n      \"NICKNM\": \"LENI SALSABILA APRILIYANI\",\n      \"DTBAL\": \"2024-05-30\",\n      \"ACCSTS\": 1,\n      \"APPLID_BE\": \"02\",\n      \"PRODNM\": \"TABUNGAN IB MASLAHAH (INSTAN)\"\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "AccNbr",
+              "value": "39358082311116631",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4b871866-2798-4c46-b9ac-3b1013b28e4a",
+      "type": "http",
+      "documentation": "Trx History / Transaction History List",
+      "method": "get",
+      "endpoint": "api/trx/history/",
+      "responses": [
+        {
+          "uuid": "1a864f30-33c4-4372-80fb-a101197e5022",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"INQUIRY MUTASI TRANSAKSI BERHASIL\",\n  \"data\": [\n    {\n      \"TXCODE\": \"299\",\n      \"TXDATE\": \"2022-08-27\",\n      \"TXAMT\": \"100000.00\",\n      \"TXDTSTLMN\": \"2024-10-21T09:33:32\",\n      \"ACCNBR\": \"0070252574216\",\n      \"TXID\": \"openAp110163\",\n      \"DBCR\": 1,\n      \"TXMSG\": \"TRF FROM 0080101574224 TO 0070252574216\",\n      \"TXBRANCH\": \"007\",\n      \"TXCCY\": \"IDR\",\n      \"USERID\": \"openAp1\",\n      \"CHANNELID\": \"27fosgw\",\n      \"SALDO\": \"516700.00\"\n    },\n    {\n      \"TXCODE\": \"299\",\n      \"TXDATE\": \"2022-08-27\",\n      \"TXAMT\": \"1000.00\",\n      \"TXDTSTLMN\": \"2024-10-17T15:16:18\",\n      \"ACCNBR\": \"0070252574216\",\n      \"TXID\": \"bankbengkulu10150\",\n      \"DBCR\": 1,\n      \"TXMSG\": \"SETOR TUNAI DARI GIRO PENAMPUNG BANK BENGKULU 0080210002622 KE 0070252574216\",\n      \"TXBRANCH\": \"007\",\n      \"TXCCY\": \"IDR\",\n      \"USERID\": \"bankbengkulu\",\n      \"CHANNELID\": \"27fosgw\",\n      \"SALDO\": \"416700.00\"\n    },\n    {\n      \"TXCODE\": \"299\",\n      \"TXDATE\": \"2022-08-27\",\n      \"TXAMT\": \"100.00\",\n      \"TXDTSTLMN\": \"2024-10-17T15:11:28\",\n      \"ACCNBR\": \"0070252574216\",\n      \"TXID\": \"bankbengkulu10149\",\n      \"DBCR\": 1,\n      \"TXMSG\": \"SETOR TUNAI DARI GIRO PENAMPUNG BANK BENGKULU 0080210002622 KE 0070252574216\",\n      \"TXBRANCH\": \"007\",\n      \"TXCCY\": \"IDR\",\n      \"USERID\": \"bankbengkulu\",\n      \"CHANNELID\": \"27fosgw\",\n      \"SALDO\": \"415700.00\"\n    },\n    {\n      \"TXCODE\": \"299\",\n      \"TXDATE\": \"2022-08-27\",\n      \"TXAMT\": \"1000.00\",\n      \"TXDTSTLMN\": \"2024-10-17T15:05:24\",\n      \"ACCNBR\": \"0070252574216\",\n      \"TXID\": \"bankbengkulu10148\",\n      \"DBCR\": 1,\n      \"TXMSG\": \"SETOR TUNAI DARI GIRO PENAMPUNG BANK BENGKULU 0080210002622 KE 0070252574216\",\n      \"TXBRANCH\": \"007\",\n      \"TXCCY\": \"IDR\",\n      \"USERID\": \"bankbengkulu\",\n      \"CHANNELID\": \"27fosgw\",\n      \"SALDO\": \"415600.00\"\n    },\n    {\n      \"TXCODE\": \"299\",\n      \"TXDATE\": \"2022-08-27\",\n      \"TXAMT\": \"1000.00\",\n      \"TXDTSTLMN\": \"2024-10-17T15:03:37\",\n      \"ACCNBR\": \"0070252574216\",\n      \"TXID\": \"bankbengkulu10147\",\n      \"DBCR\": 1,\n      \"TXMSG\": \"SETOR TUNAI DARI GIRO PENAMPUNG BANK BENGKULU 0080210002622 KE 0070252574216\",\n      \"TXBRANCH\": \"007\",\n      \"TXCCY\": \"IDR\",\n      \"USERID\": \"bankbengkulu\",\n      \"CHANNELID\": \"27fosgw\",\n      \"SALDO\": \"414600.00\"\n    }\n  ],\n  \"additionalData\": {\n    \"saldoAwal\": \"145000.00\",\n    \"saldoAkhir\": \"145000.00\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "AccNbr",
+              "value": "39358082311116631",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "size",
+              "value": "20",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e9ec18bb-fb63-4c28-924c-efd392b6dce5",
+      "type": "http",
+      "documentation": "Account Creation / Create CIF",
+      "method": "post",
+      "endpoint": "api/cif/create",
+      "responses": [
+        {
+          "uuid": "680e9a57-92c7-4af6-a094-729a0879ee3c",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 201,\n  \"status\": \"success\",\n  \"message\": \"CREATE NASABAH BERHASIL\",\n  \"data\": {\n    \"CIFID\": 3882599931,\n    \"BRANCHID\": \"529\",\n    \"BRTDT\": \"1973-11-09\",\n    \"NOHP\": \"+6282126975142\",\n    \"CIFTYPE\": 0,\n    \"FULLNM\": \"YATI SUPRIYATI\",\n    \"SURENM\": \"YATI SUPRIYATI\",\n    \"MOTHRNM\": \"manisem\",\n    \"ALIAS\": \"YATI SUPRIYATI\",\n    \"SEX\": 1,\n    \"RELIGIONID\": 1,\n    \"BRTPLACE\": \"CILACAP\",\n    \"HOBBY\": \"FUTSAL\",\n    \"POSTDEGREE\": \"A.Md.\",\n    \"MARRIAGEID\": 2,\n    \"BLOODTYPE\": \"O\",\n    \"TXTRF\": \"50,000,000.00\",\n    \"USERID\": \"fos01\",\n    \"AOID\": \"9999\",\n    \"NPWP\": \"3671084911730002\",\n    \"TXCASH\": \"50000000\",\n    \"TYPEID\": \"1\",\n    \"IDNBR\": \"3671084911730002\",\n    \"EXPDT\": \"2099-04-01\",\n    \"LASTEDUID\": \"0103\",\n    \"INSURED\": 0,\n    \"HOMEID\": 2,\n    \"BANKREL\": \"9900\",\n    \"OWNID\": \"9000\",\n    \"TBRINVEST\": 0,\n    \"TBREDU\": 0,\n    \"TBRBUSS\": 0,\n    \"TBRCAPITAL\": 0,\n    \"TBROTHER\": 1,\n    \"TXMAIN\": 1,\n    \"TAXID\": 2,\n    \"NIP\": \"201103379\",\n    \"MAINSALID\": \"01\",\n    \"ADDR\": \"DUSUN KARANGSARI\",\n    \"RT\": \"04\",\n    \"RW\": \"02\",\n    \"KELNM\": \"PANANJUNG\",\n    \"KECNM\": \"PANGANDARAN\",\n    \"PROVID\": \"01\",\n    \"CITYID\": \"0111\",\n    \"POSTALCD\": \"46553\",\n    \"COUNTRYID\": \"ID\",\n    \"AREACODE\": \"022\",\n    \"PHONENBR\": \"6282126975142\",\n    \"NOFAX\": \"02200200000\",\n    \"JOBID\": \"007\",\n    \"DTSTARTJOB\": \"2014-01-01\",\n    \"FUNCJOB\": \"3\",\n    \"NOTEFUNC\": \"Programmer\",\n    \"OTHERINFO\": \"01\",\n    \"STSJOB\": 1,\n    \"BUSSID\": \"9990\",\n    \"NOTEBUS\": \"Konsultan IT\",\n    \"NMJOB\": \"03\",\n    \"COMNMJOB\": \"PERUSAHAAN (TERMASUK BANK)\",\n    \"NOTECOMNM\": \"Collega\",\n    \"ADDRJOB\": \"CILANDAK\",\n    \"POSTALCODEJOB\": \"00100\",\n    \"LOCJOB\": \"1\",\n    \"EMAILJOB\": \"yati1@gmail.com\",\n    \"NOTELPJOB\": \"021-1212121\",\n    \"FATHRNM\": \"darsono\",\n    \"BOSTATUS\": \"-\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "73df6032-3371-4829-83bf-1dfe77461ecf",
+      "type": "http",
+      "documentation": "Transaction History List / Inquiry CIF by NIK",
+      "method": "get",
+      "endpoint": "api/v1.2/inquiry",
+      "responses": [
+        {
+          "uuid": "b60441eb-190e-43b1-a6a0-67e920e0857c",
+          "body": "{\n  \"rc\": \"00\",\n  \"statusCode\": 200,\n  \"status\": \"success\",\n  \"message\": \"Inquiry Nasabah Berhasil\",\n  \"data\": [\n    {\n      \"ADDRESS\": \"BANDUNG\",\n      \"AKTIFJOB\": 1,\n      \"AOID\": \"K0004\",\n      \"AREACODE\": \"022\",\n      \"AVGTXDAILY\": 0,\n      \"BRTDT\": \"1999-10-10\",\n      \"BRTPLACE\": \"BANDUNG\",\n      \"BUSSID\": \"\",\n      \"CIFID\": \"0000952162\",\n      \"CITY\": \"0111\",\n      \"COMPADDR\": \"\",\n      \"COMPNM\": \"DUMMY DATA\",\n      \"COUNTRYID\": \"ID\",\n      \"EXPIDEN\": \"2025-10-04\",\n      \"FULLNM\": \"DESTA\",\n      \"GENDER\": 2,\n      \"GRADE\": \"\",\n      \"HOBI\": \"DUMMY DATA\",\n      \"IDNBR\": \"3204325304990000\",\n      \"IDTYPE\": \"1\",\n      \"INCOME\": \"1\",\n      \"JOBID\": \"007\",\n      \"KECNM\": \"PASIRKALIKI\",\n      \"KELNM\": \"PASIRKALIKI\",\n      \"MARRIAGEID\": 2,\n      \"MOTHERNM\": \"AGIS\",\n      \"NOHP\": \"+621312999888\",\n      \"NPWP\": \"698930484444000\",\n      \"OWNID\": \"9000\",\n      \"NOTELPJOB\": \"021-1234567\",\n      \"PHONENBR\": \"\",\n      \"POSTALCD\": \"40394\",\n      \"PROVID\": \"01\",\n      \"RELIGION\": \"1\",\n      \"RT\": \"1\",\n      \"RW\": \"1\",\n      \"STATUS\": \"\",\n      \"SURENM\": \"DESTA\",\n      \"TAXID\": 0,\n      \"TBRBUSS\": 0,\n      \"TBRCAPITAL\": 0,\n      \"TBREDU\": 0,\n      \"TBRINVEST\": 0\n    },\n    {\n      \"ADDRESS\": \"BANDUNG\",\n      \"AKTIFJOB\": 1,\n      \"AOID\": \"K0004\",\n      \"AREACODE\": \"022\",\n      \"AVGTXDAILY\": 0,\n      \"BRTDT\": \"1999-10-10\",\n      \"BRTPLACE\": \"BANDUNG\",\n      \"BUSSID\": \"\",\n      \"CIFID\": \"0000952163\",\n      \"CITY\": \"0111\",\n      \"COMPADDR\": \"\",\n      \"COMPNM\": \"DUMMY DATA\",\n      \"COUNTRYID\": \"ID\",\n      \"EXPIDEN\": \"2025-10-04\",\n      \"FULLNM\": \"DESTA\",\n      \"GENDER\": 2,\n      \"GRADE\": \"\",\n      \"HOBI\": \"DUMMY DATA\",\n      \"IDNBR\": \"3204325304990000\",\n      \"IDTYPE\": \"1\",\n      \"INCOME\": \"1\",\n      \"JOBID\": \"007\",\n      \"KECNM\": \"PASIRKALIKI\",\n      \"KELNM\": \"PASIRKALIKI\",\n      \"MARRIAGEID\": 2,\n      \"MOTHERNM\": \"AGIS\",\n      \"NOHP\": \"+621312999888\",\n      \"NPWP\": \"698930484444000\",\n      \"OWNID\": \"9000\",\n      \"NOTELPJOB\": \"021-1234567\",\n      \"PHONENBR\": \"\",\n      \"POSTALCD\": \"0\",\n      \"PROVID\": \"01\",\n      \"RELIGION\": \"1\",\n      \"RT\": \"1\",\n      \"RW\": \"1\",\n      \"STATUS\": \"\",\n      \"SURENM\": \"DESTA\",\n      \"TAXID\": 0,\n      \"TBRBUSS\": 0,\n      \"TBRCAPITAL\": 0,\n      \"TBREDU\": 0,\n      \"TBRINVEST\": 0\n    },\n    {\n      \"ADDRESS\": \"BANDUNG\",\n      \"AKTIFJOB\": 1,\n      \"AOID\": \"K0004\",\n      \"AREACODE\": \"022\",\n      \"AVGTXDAILY\": 0,\n      \"BRTDT\": \"1999-10-10\",\n      \"BRTPLACE\": \"BANDUNG\",\n      \"BUSSID\": \"\",\n      \"CIFID\": \"0000952164\",\n      \"CITY\": \"BANDUNG\",\n      \"COMPADDR\": \"\",\n      \"COMPNM\": \"DUMMY DATA\",\n      \"COUNTRYID\": \"ID\",\n      \"EXPIDEN\": \"2025-10-04\",\n      \"FULLNM\": \"DESTA\",\n      \"GENDER\": 2,\n      \"GRADE\": \"\",\n      \"HOBI\": \"DUMMY DATA\",\n      \"IDNBR\": \"3204325304990000\",\n      \"IDTYPE\": \"1\",\n      \"INCOME\": \"1\",\n      \"JOBID\": \"007\",\n      \"KECNM\": \"PASIRKALIKI\",\n      \"KELNM\": \"PASIRKALIKI\",\n      \"MARRIAGEID\": 2,\n      \"MOTHERNM\": \"AGIS\",\n      \"NOHP\": \"+621312999888\",\n      \"NPWP\": \"698930484444000\",\n      \"OWNID\": \"9000\",\n      \"NOTELPJOB\": \"021-1234567\",\n      \"PHONENBR\": \"\",\n      \"POSTALCD\": \"0\",\n      \"PROVID\": \"01\",\n      \"RELIGION\": \"1\",\n      \"RT\": \"1\",\n      \"RW\": \"1\",\n      \"STATUS\": \"\",\n      \"SURENM\": \"DESTA\",\n      \"TAXID\": 0,\n      \"TBRBUSS\": 0,\n      \"TBRCAPITAL\": 0,\n      \"TBREDU\": 0,\n      \"TBRINVEST\": 0\n    },\n    {\n      \"ADDRESS\": \"BANDUNG\",\n      \"AKTIFJOB\": 1,\n      \"AOID\": \"K0004\",\n      \"AREACODE\": \"022\",\n      \"AVGTXDAILY\": 0,\n      \"BRTDT\": \"1999-10-10\",\n      \"BRTPLACE\": \"BANDUNG\",\n      \"BUSSID\": \"\",\n      \"CIFID\": \"0000952167\",\n      \"CITY\": \"BANDUNG\",\n      \"COMPADDR\": \"\",\n      \"COMPNM\": \"DUMMY DATA\",\n      \"COUNTRYID\": \"ID\",\n      \"EXPIDEN\": \"2025-10-04\",\n      \"FULLNM\": \"DESTA\",\n      \"GENDER\": 2,\n      \"GRADE\": \"\",\n      \"HOBI\": \"DUMMY DATA\",\n      \"IDNBR\": \"3204325304990000\",\n      \"IDTYPE\": \"1\",\n      \"INCOME\": \"1\",\n      \"JOBID\": \"007\",\n      \"KECNM\": \"PASIRKALIKI\",\n      \"KELNM\": \"PASIRKALIKI\",\n      \"MARRIAGEID\": 2,\n      \"MOTHERNM\": \"AGIS\",\n      \"NOHP\": \"+621312999888\",\n      \"NPWP\": \"698930484444000\",\n      \"OWNID\": \"9000\",\n      \"NOTELPJOB\": \"021-1234567\",\n      \"PHONENBR\": \"\",\n      \"POSTALCD\": \"0\",\n      \"PROVID\": \"1\",\n      \"RELIGION\": \"1\",\n      \"RT\": \"1\",\n      \"RW\": \"1\",\n      \"STATUS\": \"\",\n      \"SURENM\": \"DESTA\",\n      \"TAXID\": 0,\n      \"TBRBUSS\": 0,\n      \"TBRCAPITAL\": 0,\n      \"TBREDU\": 0,\n      \"TBRINVEST\": 0\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer Token"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "idnbr",
+              "value": "527132428654111",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "11cb3f64-9dfc-447a-9327-5232b78866e9"
+    },
+    {
+      "type": "route",
+      "uuid": "78128e92-0b50-4d29-9ce5-c9220db02586"
+    },
+    {
+      "type": "route",
+      "uuid": "491eb093-b51d-4919-a271-182bdec01894"
+    },
+    {
+      "type": "route",
+      "uuid": "d0974728-4d56-49c4-a0b2-b2f9e319ed2a"
+    },
+    {
+      "type": "route",
+      "uuid": "86899989-f178-4bfb-8191-35affbf96530"
+    },
+    {
+      "type": "route",
+      "uuid": "4b871866-2798-4c46-b9ac-3b1013b28e4a"
+    },
+    {
+      "type": "route",
+      "uuid": "e9ec18bb-fb63-4c28-924c-efd392b6dce5"
+    },
+    {
+      "type": "route",
+      "uuid": "73df6032-3371-4829-83bf-1dfe77461ecf"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

@@ -1,0 +1,859 @@
+{
+	"info": {
+		"_postman_id": "2dee8351-123e-448b-9bd3-5d165c6e5814",
+		"name": "002 - BJBS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28393405"
+	},
+	"item": [
+		{
+			"name": "Utility SNAP BI",
+			"item": [
+				{
+					"name": "01 Signature Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parsing the response JSON to extract the signature and header timestamp\r",
+									"const responseJson = pm.response.json();\r",
+									"const signature = responseJson.Signature;\r",
+									"const headerTimestamp = pm.response.headers.get(\"X-TIMESTAMP\");\r",
+									"\r",
+									"// Storing the values in environment variables for future use\r",
+									"pm.environment.set(\"signature\", signature);\r",
+									"pm.environment.set(\"headerTimestamp\", headerTimestamp);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-TIMESTAMP",
+								"value": "{{timestampISO8601}}",
+								"type": "text"
+							},
+							{
+								"key": "X-CLIENT-KEY",
+								"value": "7938823a-16f6-410b-bcd2-41bbc2922eab",
+								"type": "text"
+							},
+							{
+								"key": "PRIVATE-KEY",
+								"value": "{{private-key-bsb}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://172.17.28.69:8065/utilities/signature-auth",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"28",
+								"69"
+							],
+							"port": "8065",
+							"path": [
+								"utilities",
+								"signature-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"const AccessToken = responseJson.accessToken;\r",
+									"\r",
+									"pm.environment.set(\"accessToken\", AccessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {},
+						"followOriginalHttpMethod": false,
+						"followAuthorizationHeader": false,
+						"strictSSL": false,
+						"followRedirects": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2023-10-29T22:41:06+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-CLIENT-KEY",
+								"value": "7938823a-16f6-410b-bcd2-41bbc2922eab",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "YpTrBYtYI2o1Yf5bp6GfOnYijjRFR6Jva6PYJ0YaglzsQ4ozv08AIk8YCIj9XeYENJo+TXaRxgDEoDFTKesKa2FccFCUAXlhSoavWqE1nedDl3Vm8xxZ77ryykNUYMkw5MJEX0HHk9q7f+FsYsEs5wwB/FfI5UWuSxtU8TaBQmWL5UKZ2zHwgKgCGSFUBo0hMB/VdISYYAvDG5AjKbrG0iGzf5u+z22a3JEHCIZQ/THV7Y0cdFtEkKzU2ULyIRDxg75laDi5KnCXQvMvbdlsBlkH6D8mdoZmpgvlBsB5OTGt75GmAjeQMO7dT203GwqD4B9fy/C7Y2QpYetvkV3Xbg==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grant_type\": \"client_credentials\",\r\n    \"additionalInfo\": {\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://172.17.28.69:8065/1.0/access-token/b2b",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"28",
+								"69"
+							],
+							"port": "8065",
+							"path": [
+								"1.0",
+								"access-token",
+								"b2b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 Signature Service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"const signatureService = responseJson.Signature;\r",
+									"\r",
+									"pm.environment.set(\"signatureService\", signatureService);   "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2023-10-29T17:19:41+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-CLIENT-SECRET",
+								"value": "3yjy1qpli5mmzjjwhbldi9hisrj8d7dlcoxagqbgnwzhp7exue75ktgx3or45s6m",
+								"type": "text"
+							},
+							{
+								"key": "HTTP-METHOD",
+								"value": "POST",
+								"type": "text"
+							},
+							{
+								"key": "ENDPOINT-URL",
+								"value": "/bsb/snap-bi/v1.0/transfer-status",
+								"type": "text"
+							},
+							{
+								"key": "ACCESS-TOKEN",
+								"value": "T6m3RdqAEV3kX7riKKZM6PIeaq0ntSeXGQPynjC8MpjIheLQ8Q7UjM",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"originalPartnerReferenceNo\": \"231003308325\",\r\n    \"originalReferenceNo\": \"20231003114911204000003694\",\r\n    \"originalExternalId\": \"41807553358950093184162180797837\",\r\n    \"serviceCode\": \"17\",\r\n    \"transactionDate\": \"2019-07-03T12:08:56+07:00\",\r\n    \"amount\": {\r\n        \"value\": \"3001.59\",\r\n        \"currency\": \"IDR\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"channelId\": \"7002\",\r\n        \"forwarderId\": \"100504\",\r\n        \"terminalId\": \"APISPSR\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{ip-frontend-apim-bsb}}/utilities/signature-service",
+							"host": [
+								"{{ip-frontend-apim-bsb}}"
+							],
+							"path": [
+								"utilities",
+								"signature-service"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Frontend APIM",
+			"item": [
+				{
+					"name": "Internal Account Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": " Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "Authorization-Customer",
+								"value": " Bearer fa8sjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": " 2020-12-21T10:11:40+07:00 ",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": " 85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "ORIGIN",
+								"value": " www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": " 82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": " 41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": " 172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": " 09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": " -6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": " 106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": " 95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"partnerReferenceNo\":\"2020102900000000000001\",\r\n   \"beneficiaryAccountNo\":\"888801000157508\",\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/account-inquiry-internal",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"account-inquiry-internal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Balance Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "Authorization-Customer",
+								"value": "Bearer fa8sjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2020-12-18T15:06:00+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "ORIGIN",
+								"value": "www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": "82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": "41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": "172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": "09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": "-6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": "106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": "95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"partnerReferenceNo\":\"2020102900000000000001\",\r\n   \"bankCardToken\":\"6d7963617264746f6b656e\",\r\n   \"accountNo\":\"7382382957893840\",\r\n   \"balanceTypes\":[\r\n      \"Cash\",\r\n      \"Coins\"\r\n   ],\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/balance-inquiry",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"balance-inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer Intrabank",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "Authorization-Customer",
+								"value": "Bearer fa8sjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2020-12-21T10:30:24+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "ORIGIN",
+								"value": "www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": "82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": "41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": "172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": "09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": "-6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": "106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": "95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"partnerReferenceNo\":\"2020102900000000000001\",\r\n   \"amount\":{\r\n      \"value\":\"12345678.00\",\r\n      \"currency\":\"IDR\"\r\n   },\r\n   \"beneficiaryAccountNo\":\"888801000003301\",\r\n   \"beneficiaryEmail\":\"yories.yolanda@work.bri.co.id \",\r\n   \"currency\":\"IDR\",\r\n   \"customerReference\":\"10052019\",\r\n   \"feeType\":\"BEN\",\r\n   \"remark\":\"remark test\",\r\n   \"sourceAccountNo\":\"888801000157508\",\r\n   \"transactionDate\":\"2019-07-03T12:08:56-07:00\",\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/transfer-intrabank",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"transfer-intrabank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Transfer Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "Authorization-Customer",
+								"value": "Bearer fa8sjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2020-12-21T14:56:11+07:00 ",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "X-ORIGIN",
+								"value": "www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": "82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": "41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": "172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": "09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": "-6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": "106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": "95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"originalPartnerReferenceNo\":\"2020102900000000000001\",\r\n   \"originalReferenceNo\":\"2020102977770000000009\",\r\n   \"originalExternalId\":\"30443786930722726463280097920912\",\r\n   \"serviceCode\":\"17\",\r\n   \"transactionDate\":\"2019-07-03T12:08:56-07:00\",\r\n   \"amount\":{\r\n      \"value\":\"12345678.00\",\r\n      \"currency\":\"IDR\"\r\n   },\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/transfer/status",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"transfer",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction History List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "Authorization-Customer",
+								"value": "Bearer fa8sjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2020-12-18T15:34:40+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "ORIGIN",
+								"value": "www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": "82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": "41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": "172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": "09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": "-6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": "106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": "95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"partnerReferenceNo\":\"2020102900000000000001\",\r\n   \"fromDateTime\":\"2019-07-03T12:08:56-07:00\",\r\n   \"toDateTime\":\"2019-07-03T12:08:56-07:00\",\r\n   \"pageSize\":\"10\",\r\n   \"pageNumber\":\"2\",\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/transaction-history-list",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"transaction-history-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Creation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer gp9HjjEj813Y9JGoqwOeOPWbnt4CUpvIJbU1mMU4a11MNDZ7Sg5u9a\"",
+								"type": "text"
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": "2020-12-17T14:49:00+07:00",
+								"type": "text"
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": "85be817c55b2c135157c7e89f52499bf0c25ad6eeebe04a986e8c862561b19a5",
+								"type": "text"
+							},
+							{
+								"key": "ORIGIN",
+								"value": "www.hostname.com",
+								"type": "text"
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": "82150823919040624621823174737537",
+								"type": "text"
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": "41807553358950093184162180797837",
+								"type": "text"
+							},
+							{
+								"key": "X-IP-ADDRESS",
+								"value": "172.24.281.24",
+								"type": "text"
+							},
+							{
+								"key": "X-DEVICE-ID",
+								"value": "09864ADCASA",
+								"type": "text"
+							},
+							{
+								"key": "X-LATITUDE",
+								"value": "-6.1617169",
+								"type": "text"
+							},
+							{
+								"key": "X-LONGITUDE",
+								"value": "106.6643946",
+								"type": "text"
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": "95221",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"partnerReferenceNo\":\"2020102900000000000001\",\r\n   \"countryCode\":\"ID\",\r\n   \"customerId\":\"00-abcdefghijklmnopqrstuvwxyz0123456789-11\",\r\n   \"deviceInfo\":{\r\n      \"os\":\"IOS\",\r\n      \"osVersion\":\"1\",\r\n      \"model\":\"Iphone\",\r\n      \"manufacture\":\"Apple\"\r\n   },\r\n   \"email\":\"john.doe@email.com\",\r\n   \"lang\":\"ID\",\r\n   \"locale\":\"en_ID\",\r\n   \"name\":\"John doe\",\r\n   \"onboardingPartner\":\"GOJEKXXX\",\r\n   \"phoneNo\":\"0899345678864332\",\r\n   \"redirectUrl\":\"https://merchant.site.com/apptoken\",\r\n   \"scopes\":\"QUERY_BALANCE,QUERY_PROFILE\",\r\n   \"seamlessData\": \"{\\\"mobile\\\":\\\"62-882345678\\\",\\\"verifiedTime\\\":\\\"2001-07-04T12:08:56+05:30\\\",\\\"externalUid\\\":\\\"TIXxxxxxUID\\\",\\\"reqTime\\\":\\\"2001-07-04T12:08:56+05:30\\\",\\\"riskData\\\":{\\\"fuzzyDeviceId\\\":\\\"k+OrCqw7QMNxlrT3qU2m0TRYTucd+nrMH2izjtltJgLqNI2XZgEAAA\\\",\\\"terminalType\\\":\\\"APP\\\",\\\"riskFlag\\\":\\\"00110\\\",\\\"realIp\\\":\\\"123.23.12.111\\\"}}\",\r\n   \"seamlessSign\" \"URLEncode(BASE64(sigin( \"{\\\"mobile\\\":\\\"62-882345678\\\",\\\"verifiedTime\\\":\\\"2001-07-04T12:08:56+05:30\\\",\\\"externalUid\\\":\\\"TIXxxxxxUID\\\",\\\"reqTime\\\":\\\"2001-07-04T12:08:56+05:30\\\",\\\"riskData\\\":{\\\"fuzzyDeviceId\\\":\\\"k+OrCqw7QMNxlrT3qU2m0TRYTucd+nrMH2izjtltJgLqNI2XZgEAAA::\\\",\\\"terminalType\\\":\\\"APP\\\",\\\"riskFlag\\\":\\\"00110\\\",\\\" realIp\\\":\\\"123.23.12.111\\\"}}\" )))\",\r\n   \"state\":\"12345556666\",\r\n   \"merchantId\":\"00007100010926\",\r\n   \"subMerchantId\":\"310928924949487\",\r\n   \"terminalType\":\"SYSTEM\",\r\n   \"additionalInfo\":{\r\n      \"deviceId\":\"12345679237\",\r\n      \"channel\":\"mobilephone\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ipaddress:port/v1.0/registration-account-creation",
+							"protocol": "http",
+							"host": [
+								"ipaddress"
+							],
+							"port": "port",
+							"path": [
+								"v1.0",
+								"registration-account-creation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ip-frontend2-apim-bjbs",
+			"value": "http://172.17.28.69:8065",
+			"type": "string"
+		},
+		{
+			"key": "ip-frontend-apim-bjbs",
+			"value": "https://mitratest.banksumselbabel.com:8065",
+			"type": "string"
+		},
+		{
+			"key": "client-id-bjbs",
+			"value": "e37c947e-002d-446a-9f92-4ed143786fe4",
+			"type": "string"
+		},
+		{
+			"key": "private-key-bjbs",
+			"value": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcPpf8mK9OgJD9a26gy83ent9a879NL+Pn7LS/8gkOXtQf+PduKVXcJeYvwaTtgY9yC9i1AeVOSAfaH5KS+sWOxjVuZ3t/iNGlKMc6FIAfrDDh3+PkYzDcKAu0HjeF+lp4vSsVBW558/0TGUiZryIFlM1NiaaABLf8J0WCgHfMn4c7QGg7rie6aT4EZDitjN4UTOtvXnJeFExyCcLaehtru870YSCU2zyW9v8IetILm8t3+BQ2er8V9YiY4VYFn77cPVnWE2CGghZS8UpegBIYcu8XvSPiz7B5MG21SuQ4tjYC/R8NyBXKTRPQPOhpM2DeUOE6JL4TW7lQcRBBgIYfAgMBAAECggEAAzJwr7V8GNIepWDWYanp6306usS0DGNHeY5pYGgWcVnVY1YX0gQ8goWwARgoRMfa5I2DgKiqRYDJ0FfHCwTgl/xMSZcKeuCU0ZlVAkY7HOrMEUMgiaLR9B9JpgTcQ/yMb14HjKWQziQE8KgayTJBMvYJgWWop4PxM9Kl5Ha2fNRanCWsQXxn2peOR6ghGj/j5uyGgv634qAnVJEaKkUKKgqTxT7zIWwkD+nGfUZpoOf/NIjEiznfVKGLVvFrmtNI8EmEkfnMBEPu2+82kWKF42vSj7V8/4hYQuEfIpQ9FhWj6b9nmT153HiSAVFck/fgpFZoJyeYkwTWs2R0mt1SCQKBgQDZxqk51ZIpv6qv8Ff/4lyq6CnzjEKcbM+lZ4waKtk0J9/MhqR0uukm848FJsfGEK+88ig6K56m3FJHOCV/AYp1Bwqw+YEDxDJFMyYewEhwki+q3RPoKq1rocCvRb828M2+VcZorujpsOCf/91jDjvyp0OIa6fTtrnLFJnHc4BAlQKBgQC3qyJ2h5T1lIiN2Mo3MbRGfTA/kSrwmmZzXB1N77uL/5DUdHjUQGiK142yqltACR7QwoYmBdEbX9eRdru8PiN10nAoSkU9P42lPfFBREjzbqVkxaDjtZYvm81Ig+acOpjclwIl7OOLLcSO8YUmCDgHqNIS1ENQkW8DYTpc+q+64wKBgErejKFQdm6Z8VGJXIehR+CN7pZHe0MR+ZVQ8w6v+np+1ucWxwVGmQ+GHn5T5cyHQhPAYOoWwvV0u2i2udVfLz2qjRdov90On4XA3vMlggIJkA+677QasAJX2smnPeTihqlQDeVBdNuarq7zJSZ/50Y2EPaepFUZ9egGjhPO9qG9AoGATF/JcOhoNMaTEgj37YOppzYffg9rf6l0uLuxI9twbYLUQsQ8CmbOEg4YShc04qfoPH7nMaBxl6R/C2oIHvrn2/Kp2Ncpe5KV4ASl8bHnc/KqrADSKl40GY/8CQ9wMb7cGb5hkkuzQwjBF3+vEmWQhv7YfCPv6ezP8OPZVRiZQmkCgYEAp8KyQrtNp/wBwTtOicC5/KhRyXF98V8Gdr9bjU+Xl7qUQ6k2uY83tsvIVZyLws06et5pW761AUTW5f4gm5fRQfRzSWlw9PaiZfHA1TUqcMoBKoR1URF9Pop3tVWH9Ixn1/EGhfTd60yNKHdbaadMskHNATmJ60s3hbatN501yjo=",
+			"type": "string"
+		},
+		{
+			"key": "client-secret-bjbs",
+			"value": "182c7e30-114e-4e0d-8105-1534fd0558aa",
+			"type": "string"
+		},
+		{
+			"key": "ip-backend-apim-bjbs",
+			"value": "http://172.17.28.69:8080",
+			"type": "string"
+		},
+		{
+			"key": "client-id-test",
+			"value": "cde71cea-a84d-4df6-b3bd-328e03ad8c31",
+			"type": "string"
+		},
+		{
+			"key": "private-key-test",
+			"value": "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC36Cdda7X61hrL/2x07mNsiYwLgA27lMk/w4W+SeyAV0SINIOPQ6fJLeO37sFGeqwbQtQBuTxGm8FDNqdH/YL20t3b9qL+Ek8m3uvGNjg7MENkeOGVCLWxAeoZuo62Od0WCbSiGz/nICwfek1bv6Cwc/N3d5Ym1ciD0WMVLPIJ7VY6J9f/zsOLClTW8AEzQzjpkSjQhbpSbsVqsv7ITCveJeVTWiX+SvkWnfAY1MRBHKsE+O984yi7C+QUpGjqDMAGo6I63HRz7+HmA79J35MDJuzPmwaS6CtxbRzXfMo5TWcFnR8maSvNchJ03N/Lo8JgwVlMLsEyZ31qz92kYY+JAgMBAAECggEBAJbaaZ/qAIZXJff79v0bppabZTLxwVIDQ+l3+rcScFr+Oor3eIsF1hXh/I8d25Byg8aA1OLtDRJmJOt7Y1BcFRdd9Pq/nweGAUNDTGd0hj+W4VEDDxdu44rkpSChtPqpED9JitAGRi7SZx8S9W2zDJ5xHl76y0HjzuzBzuLJ0WhtzxysXXnPaWl0TtGXLdJbzNugZ+9YbDE+W45giWvtq3rJCPWLPDJuitJc2aXnThO04IlMB066uKNxD/oyMyNTG8QUmDs27zUUsZWjYVARU47aGHPtoDI7s2xUqirFDiRIy6+gOpLvshaHtVmXxaHE/CpqpPt9YqY3T2zJRho5/gECgYEA7Nzyox9P4Ke7sdClqO+3wfj767nbmhTpcISIlPJdlqQxCF34H2dMNpgHO+av12ylK7uznXay+QGRxpfNQ+Ct9eaLBX/4g3IsKsN4zlngNnytZIIrPqAE5ewrmXDXYpXYsDFBa4goISwM3M26idsp3ifC/0vEMMB+/nuGmQtzw+kCgYEAxsPozZFHaWcwigYtFt+GGMIPmP92ROGhCwuTfpYsCR+vuApEuwu108bK/dLXRlLd8B4/WItr7zxSR0Ogvu4ol4SQmJ3TnXEaOs4PDkso5ekW7pxmr1RZWpGbu7rEaULAq2YFa9kaQ4bXy505QSjp1E0Tf4HUL8HuLvgozi0iSqECgYB/6r76y1E3ET6zQ+wDNRq3HcDnSCNJrht30Yt1bQKP9TIpw53ZT87/+NCHUAkMvTbiTGcvFciH44oXhymqi69HCm9v0/GhA0rI+XHHdxA4PNLjYcz68C5VAVt2bVNUgXpZhPBAo3KQn5p+sHgaNQsCV9TeTMuyTHMI+irxghbN6QKBgHpmjmh4/Ib2GrgEkaOyRnvclYpcVtKYN3n7yPp9M+TydF1bRXQCBBjEJKEmQ5d01GNX3R6DzRXoCasFBGpPcwPLiNfS6UvdKI/p8O+WbTsXzR1nhvyVbukNHd//ZZCEoO1ryA7gBQJseVtUGLv9m/E2/bjZlHdMb4bRHx/IP4PBAoGBAJsBU7j+CBKyPw+gCmj85dtRm9Opd6HXXwkRy4/OKjUo+ysCZLzd9VU5zKyhx4ptY4DI2Fwui1DbJ5nx5bbU33yPGO2c/DmpQf99opXlo4CuhDnz8bO0RSeRWvX0ht0g8PXUHUOmHmkVLgQsw4FLGN3+rwXAeqFeC6eAe1J+tr9f",
+			"type": "string"
+		},
+		{
+			"key": "client-secret-test",
+			"value": "d33ca0c9-b06a-46c4-b510-30a15d42a1e0",
+			"type": "string"
+		},
+		{
+			"key": "ip-backend-apim-dev",
+			"value": "10.10.62.72:9992",
+			"type": "string"
+		}
+	]
+}
