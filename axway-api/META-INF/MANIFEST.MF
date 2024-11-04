@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Id: aefe71e0-dbbc-429f-b46a-a47199412f34
+Timestamp: 1716798747649
+Format: JAR
+
